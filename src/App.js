@@ -1,9 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+const skills = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA"
+  },
+  {
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D"
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF"
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33"
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB"
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00"
+  }
+];
+
 
 function App() {
   return (
-    <div className='App'>
+    <div className='card'>
       <Image/>
       <Intro/>
       <Skills/>
@@ -15,13 +48,13 @@ function App() {
 
 function Image(){
   return(
-   <img src='pics/Sir Emmy Passport.png' alt="Profile" />
+   <img className='avatar' src='pics/Sir Emmy Passport.png' alt="Profile" />
   );
 }
 
 function Intro(){
   return(
-    <div>
+    <div className='data'>
       <h2>OJEABUO EMMANUEL</h2>
       <p> 🎯 Passionate Software Developer | 📱 Flutter Mobile Developer | 🌐 Full-Stack JavaScript | ☁️ Cloud Engineer
 🔍            
@@ -32,9 +65,18 @@ function Intro(){
 }
 
 function Skills(){
+  const skillList = skills
+
   return(
-    <div className='container'>
-      <Skillset
+    <div className='skill-list'>
+      {skillList.map((skillList) => (
+        <Skillset
+          key={skillList.skill}
+          skillObject={skillList}
+        />
+      ))}
+
+      {/* <Skillset
             skill="Html+css "  emoji="💪" color = "green"/>
       <Skillset
             skill="Javascript "  emoji="👍" color = "grey"/>
@@ -45,16 +87,16 @@ function Skills(){
       <Skillset
             skill="Flutter  "  emoji="🤝" color = "purple"/>
       <Skillset
-            skill="Cloud computing "  emoji="🌞" color = "red"/>
+            skill="Cloud computing "  emoji="🌞" color = "red"/> */}
       </div>
   );
 }
 
-function Skillset(props){
+function Skillset({skillObject}){
   return(
-    <div className='skillset' style={{backgroundColor: props.color}}>
-      <span>{props.skill}</span>
-      <span>{props.emoji}</span>
+    <div className='skill' style={{backgroundColor: skillObject.color}}>
+      <span>{skillObject.skill}</span>
+      <span>{skillObject.level === "beginner" ? "👶" : skillObject.level === "intermediate" ? "👍" : "💪"}</span>
     </div>
     
   );
